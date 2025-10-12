@@ -7,7 +7,7 @@
   "type": "module",
   "main": "main.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node main.js"
   },
   "keywords": [
     "github-actions",

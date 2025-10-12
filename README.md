@@ -77,6 +77,22 @@ jobs:
           stack-name: ${{ github.event.inputs.stack-name }}
 ```
 
+### Deploy with Pull Before Deploy
+
+Pull the latest changes before deploying:
+
+```yaml
+- name: Deploy with Pull
+  uses: pandeptwidyaop/komodoactions@v1
+  with:
+    komodo-url: ${{ secrets.KOMODO_URL }}
+    api-key: ${{ secrets.KOMODO_API_KEY }}
+    api-secret: ${{ secrets.KOMODO_API_SECRET }}
+    stack-name: 'dev-pijatmu'
+    services: 'app'
+    pull-before-deploy: true  # Pull stack before deploy
+```
+
 ### Deploy with Docker Build
 
 ```yaml
@@ -128,6 +144,7 @@ jobs:
 | `services` | No | `''` | Services to deploy (comma-separated, leave empty for all services) |
 | `wait-for-completion` | No | `true` | Wait until deployment completes |
 | `show-logs` | No | `true` | Show detailed deployment logs |
+| `pull-before-deploy` | No | `false` | Pull stack before deployment |
 
 ## Outputs
 

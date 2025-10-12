@@ -11,6 +11,7 @@ async function run() {
     const servicesInput = core.getInput("services");
     const waitForCompletion = core.getInput("wait-for-completion") === "true";
     const showLogs = core.getInput("show-logs") === "true";
+    const pullBeforeDeploy = core.getInput("pull-before-deploy") === "true";
 
     // Parse services
     const services = servicesInput
@@ -39,6 +40,20 @@ async function run() {
     const requestParams = { stack: stackName };
     if (services) {
       requestParams.services = services;
+    }
+
+    // Pull stack before deploy if enabled
+    if (pullBeforeDeploy) {
+      core.info("Pulling stack before deployment...");
+      const pullUpdate = await client.execute_and_poll("PullStack", requestParams);
+
+      core.info(`✓ Pull completed!`);
+      core.info(`Pull Status: ${pullUpdate.status}`);
+      core.info(`Pull Success: ${pullUpdate.success ? "Yes" : "No"}`);
+
+      if (!pullUpdate.success) {
+        throw new Error(`Pull stack failed: ${pullUpdate.status}`);
+      }
     }
 
     // Deploy stack
