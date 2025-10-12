@@ -1,6 +1,6 @@
 name: 'Komodo Stack Deploy'
 description: 'Deploy a stack on Komodo server using API'
-author: 'Your Name'
+author: 'pandeptwidyaop'
 
 inputs:
   komodo-url:

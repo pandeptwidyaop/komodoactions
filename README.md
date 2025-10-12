@@ -1,19 +1,19 @@
 # Komodo Deploy Action
 
-GitHub Action untuk deploy stack di Komodo server menggunakan API.
+GitHub Action to deploy stacks on Komodo server using API.
 
 ## Quick Start
 
 ### 1. Setup Secrets
 
-Tambahkan secrets di repository Settings → Secrets and variables → Actions:
-- `KOMODO_URL` - URL Komodo server Anda
-- `KOMODO_API_KEY` - API key dari Komodo
-- `KOMODO_API_SECRET` - API secret dari Komodo
+Add secrets in repository Settings → Secrets and variables → Actions:
+- `KOMODO_URL` - Your Komodo server URL
+- `KOMODO_API_KEY` - API key from Komodo
+- `KOMODO_API_SECRET` - API secret from Komodo
 
-### 2. Buat Workflow
+### 2. Create Workflow
 
-Buat file `.github/workflows/deploy.yml` di repository Anda:
+Create file `.github/workflows/deploy.yml` in your repository:
 
 ```yaml
 name: Deploy to Komodo
@@ -39,7 +39,7 @@ jobs:
 
 ### Deploy Specific Services
 
-Deploy hanya service tertentu saja (misalnya hanya app):
+Deploy only specific services (e.g., only app service):
 
 ```yaml
 - name: Deploy Specific Services
@@ -77,7 +77,7 @@ jobs:
           stack-name: ${{ github.event.inputs.stack-name }}
 ```
 
-### Deploy dengan Build Docker Image
+### Deploy with Docker Build
 
 ```yaml
 name: Build and Deploy
@@ -115,43 +115,43 @@ jobs:
           services: 'app'
 ```
 
-**📚 Lihat [USAGE_EXAMPLE.md](USAGE_EXAMPLE.md) untuk 10+ contoh penggunaan lainnya!**
+**📚 See [USAGE_EXAMPLE.md](USAGE_EXAMPLE.md) for 10+ more usage examples!**
 
 ## Inputs
 
 | Name | Required | Default | Description |
 |------|----------|---------|-------------|
-| `komodo-url` | Yes | - | URL Komodo server (e.g., `https://komodo.example.com`) |
+| `komodo-url` | Yes | - | Komodo server URL (e.g., `https://komodo.example.com`) |
 | `api-key` | Yes | - | Komodo API key |
 | `api-secret` | Yes | - | Komodo API secret |
-| `stack-name` | Yes | - | Nama stack yang akan di-deploy |
-| `services` | No | `''` | Services yang akan di-deploy (comma-separated, kosongkan untuk semua) |
-| `wait-for-completion` | No | `true` | Tunggu sampai deployment selesai |
-| `show-logs` | No | `true` | Tampilkan detail logs deployment |
+| `stack-name` | Yes | - | Stack name to deploy |
+| `services` | No | `''` | Services to deploy (comma-separated, leave empty for all services) |
+| `wait-for-completion` | No | `true` | Wait until deployment completes |
+| `show-logs` | No | `true` | Show detailed deployment logs |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `update-id` | ID update yang dikembalikan oleh Komodo |
-| `status` | Status deployment (jika wait-for-completion true) |
+| `update-id` | Update ID returned by Komodo |
+| `status` | Deployment status (if wait-for-completion is true) |
 
 ## How to Use in Your Repository
 
-1. **Tambahkan secrets** di Settings → Secrets and variables → Actions:
+1. **Add secrets** in Settings → Secrets and variables → Actions:
    - `KOMODO_URL`
    - `KOMODO_API_KEY`
    - `KOMODO_API_SECRET`
 
-2. **Buat workflow file** `.github/workflows/deploy.yml`
+2. **Create workflow file** `.github/workflows/deploy.yml`
 
-3. **Reference action** dengan `pandeptwidyaop/komodoactions@v1`
+3. **Reference action** with `pandeptwidyaop/komodoactions@v1`
 
 4. **Push & Deploy!**
 
 ## Development
 
-Untuk develop action ini lebih lanjut:
+To develop this action further:
 
 ### Testing Locally
 
@@ -162,7 +162,7 @@ npm test
 
 ### Test Deploy
 
-Edit `index.js` dengan credentials Anda dan jalankan:
+Edit `index.js` with your credentials and run:
 
 ```bash
 node index.js
