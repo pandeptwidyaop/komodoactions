@@ -1,0 +1,8 @@
+# NOTE: node_modules/ should be committed for GitHub Actions
+# If you want to bundle instead, use @vercel/ncc and uncomment below
+# node_modules/
+
+*.log
+.env
+.DS_Store
+node_modules

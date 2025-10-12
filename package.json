@@ -1,0 +1,22 @@
+{
+  "name": "komodo-deploy-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to deploy stacks on Komodo server",
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "github-actions",
+    "komodo",
+    "deployment",
+    "docker"
+  ],
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "komodo_client": "^1.19.5"
+  }
+}

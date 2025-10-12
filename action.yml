@@ -1,0 +1,39 @@
+name: 'Komodo Stack Deploy'
+description: 'Deploy a stack on Komodo server using API'
+author: 'Your Name'
+
+inputs:
+  komodo-url:
+    description: 'Komodo server URL (e.g., https://komodo.example.com)'
+    required: true
+  api-key:
+    description: 'Komodo API key'
+    required: true
+  api-secret:
+    description: 'Komodo API secret'
+    required: true
+  stack-name:
+    description: 'Name of the stack to deploy'
+    required: true
+  services:
+    description: 'Services to deploy (comma-separated, e.g., "app,db" or leave empty for all services)'
+    required: false
+    default: ''
+  wait-for-completion:
+    description: 'Wait for deployment to complete (true/false)'
+    required: false
+    default: 'true'
+  show-logs:
+    description: 'Show detailed deployment logs (true/false)'
+    required: false
+    default: 'true'
+
+outputs:
+  update-id:
+    description: 'The update ID returned by Komodo'
+  status:
+    description: 'The final status of the deployment'
+
+runs:
+  using: 'node20'
+  main: 'main.js'
