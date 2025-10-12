@@ -31,9 +31,35 @@ inputs:
 outputs:
   update-id:
     description: 'The update ID returned by Komodo'
+    value: ${{ steps.deploy.outputs.update-id }}
   status:
     description: 'The final status of the deployment'
+    value: ${{ steps.deploy.outputs.status }}
 
 runs:
-  using: 'node20'
-  main: 'main.js'
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm ci --production
+      shell: bash
+      working-directory: ${{ github.action_path }}
+
+    - name: Run action
+      id: deploy
+      run: node main.js
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      env:
+        INPUT_KOMODO-URL: ${{ inputs.komodo-url }}
+        INPUT_API-KEY: ${{ inputs.api-key }}
+        INPUT_API-SECRET: ${{ inputs.api-secret }}
+        INPUT_STACK-NAME: ${{ inputs.stack-name }}
+        INPUT_SERVICES: ${{ inputs.services }}
+        INPUT_WAIT-FOR-COMPLETION: ${{ inputs.wait-for-completion }}
+        INPUT_SHOW-LOGS: ${{ inputs.show-logs }}
+  
