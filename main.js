@@ -110,8 +110,13 @@ async function run() {
       core.info(`Update ID: ${updateId}`);
     }
   } catch (error) {
-    core.setFailed(`Action failed: ${error.message}`);
-    if (error.stack) {
+    const errorMessage = error instanceof Error
+      ? error.message
+      : typeof error === 'string'
+        ? error
+        : JSON.stringify(error, null, 2);
+    core.setFailed(`Action failed: ${errorMessage}`);
+    if (error instanceof Error && error.stack) {
       core.debug(error.stack);
     }
   }
